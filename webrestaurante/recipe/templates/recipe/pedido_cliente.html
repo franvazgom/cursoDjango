@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% block title %}Pedido{% endblock %}
+{% block content %}
+{% load static %}
+  <div class="container mb-4">
+    <form id="formPedido" name="formPedido" class="px-0 py-2 pb-5" action="" method="post">
+        {% csrf_token %}
+
+        <table class="text-white">
+            {{ form.as_table }}
+        </table>
+
+        <div class="row mt-0">        
+            <div class="col-md-9 mx-auto mb-1">
+            <div id="button_submit" class="float-right">
+            <button type="submit" class="btn text-info form-btn mx-1" style="width:170px;">
+                <span class="spinner-border spinner-border-sm d-none"></span>
+                <i class="fas fa-paper-plane fa-fw"></i> Continuar
+            </button>
+            </div>
+            </div>
+        </div>
+    </form>
+  </div>
+{% endblock %}

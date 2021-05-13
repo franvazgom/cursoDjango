@@ -1,0 +1,54 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Pedido{% endblock %}
+{% block content %}
+    <div class="container">      
+      <div class="row mt-2">        
+        <div class="col-md-9 mx-auto mb-1">
+          <table class="table table-striped">
+            <thead class="text-white">
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>                
+              </tr>
+            </thead>
+            <tbody class="text-white">
+              {% for producto in pedido %}
+              <tr>                
+                <td>                  
+                  {{producto.descripcion}}
+                </td>  
+                <td>                  
+                  {{producto.cantidad}}
+                </td>  
+                <td>
+                  {{producto.precio}}
+                </td>                
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>                    
+        </div>
+      </div>      
+      <div class="row mt-1">        
+        <div class="col-md-9 mx-auto mb-2">
+          <div class="float-right">
+              <span class="text-white">Total = {{total}} </span> 
+          </div>
+        </div>
+      </div> 
+
+      <div class="row mt-0">        
+        <div class="col-md-9 mx-auto mb-1">
+          <div id="button_submit" class="float-right">
+          <a href="{% url 'recipes:create_pedido' %}" class="btn text-white form-btn mx-1">
+            <span class="spinner-border spinner-border-sm d-none"></span>
+            <i class="fas fa-paper-plane fa-fw"></i> Confirmar Pedido
+          </a>
+          </div>
+        </div>
+      </div>
+
+    </div>    
+{% endblock %}

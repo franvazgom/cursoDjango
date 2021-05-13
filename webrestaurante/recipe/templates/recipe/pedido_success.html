@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+{% block title %}Recetas{% endblock %}
+{% block content %}
+{% load static %}
+<h1 class="text-white">Gracias por su preferencia.. </h1>
+{% endblock %}
+
+{% block contentJS %}
+<script>
+    //Se limpia los datos en el localSotrage
+    localStorage.clear();
+    show_badge_cart();  
+
+</script>
+{% endblock %}

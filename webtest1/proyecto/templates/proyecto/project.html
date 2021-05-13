@@ -1,0 +1,43 @@
+{% extends 'core/base.html'%} 
+{% block title %} Proyectos {% endblock %} 
+{% block content %} {% load static %}
+
+<!-- Contenido Principal -->
+<div class="margen_top container">
+  <div class="container">
+  <h1 class='text-center'>Mis Proyectos</h1>
+  </div>
+  <div class="row">
+    <div class="col d-sm-block">
+      <div class="container">
+        {% for project in projects %}
+          <!-- Proyecto -->
+          <div class="row project">
+            <div class="col-lg-3 col-md-4 offset-lg-1">
+              <img
+                class="img-fluid mb-3 rounded-circle"
+                src="{{project.image.url}}"
+                alt=""
+              />
+            </div>
+            <div class="col-lg-7 col-md-8">
+              <h2 class="section-heading title">                            
+                {{project.title}}
+              </h2>
+              <p class="text-justify">
+                {{project.description}}
+              </p>
+              {% if project.link %}
+                <p>
+                  <a href="{{project.link}}">Más información</a>
+                </p>
+              {% endif %}
+            </div>
+          </div>  
+        {% endfor %}      
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

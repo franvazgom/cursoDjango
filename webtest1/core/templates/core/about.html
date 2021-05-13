@@ -1,0 +1,39 @@
+{% extends 'core/base.html'%} 
+{% block title %} Acerca de {% endblock %} 
+{% block content %} 
+{%load static%}
+<!-- Contenido Principal -->
+<div class="margen_top container">
+  <div class="row">
+    <div class="col-lg-5 col-md-4">
+      <img class="img-fluid" src="{% static 'core/img/avatar.png' %}" alt="" />
+    </div>
+    <div class="col-lg-7 col-md-8">
+      <h2 class="section-heading">Juan Pérez</h2>
+      <p>
+        Nacido en... lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Saepe nostrum ullam eveniet pariatur voluptates odit, fuga atque ea
+        nobis sit soluta odio.
+      </p>
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio
+        tempora ab, harum voluptates blanditiis, voluptatibus porro ut
+        aspernatur quas architecto magni commodi facilis quis est nisi dolores,
+        maxime autem aperiam? Sapiente quibusdam fuga officiis repellendus
+        laborum nemo, aperiam nulla, harum dignissimos, incidunt dicta quas
+        veniam delectus quisquam eum cum recusandae omnis alias qui adipisci
+        reiciendis? Facere quae unde ex voluptatum!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere dolorum
+        minus possimus, beatae, enim quas ipsa corrupti distinctio fuga officia
+        eligendi optio quo laudantium exercitationem pariatur vel explicabo at
+        voluptatum.
+      </p>
+    </div>
+  </div>
+</div>
+
+<hr />
+
+{% endblock %}

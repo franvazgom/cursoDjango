@@ -1,0 +1,56 @@
+{% extends 'core/base.html' %}
+{% block title %}Recetas{% endblock %}
+{% block content %}
+{% load static %}
+{% include 'recipe/includes/menu_recipe.html' %}
+
+  <div class="container mb-4">
+    <!-- recipe_list or object_list -->
+    {% for recipe in recipe_list|dictsort:'id' reversed %}
+      <div class="row mt-3">
+        
+          <div class="col-md-9 mx-auto text-light">
+            <h2 class="section-heading mb-4">
+                    <span class="section-heading-lower">{{recipe.title}}</span>
+            </h2>
+            
+            <div>
+              <p>{{recipe.content|striptags|safe|truncatechars:"200"}}</p>
+              <p>
+                <a class="btn btn-primary" href="{% url 'recipes:recipe' recipe.id recipe.title|slugify %}" role="button">Leer más</a>
+                <a class="btn btn-secondary" onclick="agregaCarrito({{recipe.id}})" role="button">Agregar al carrito</a>
+
+              {% if request.user.is_staff %}
+              <a class="btn btn-primary" href="{% url 'recipes:update' recipe.id %}" role="button">Editar</a>             
+              <a class="btn btn-primary" href="{% url 'recipes:delete' recipe.id %}" role="button">Eliminar</a>             
+              {% endif %}
+              </p>
+            </div>
+          </div>
+        
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+{% block contentJS %}
+
+  <script>
+
+    function agregaCarrito(id){
+      if (cart[id] != undefined) {
+        cart[id] += 1;
+      }else{
+        cart[id] = 1;
+      }
+
+      // Se coloca en el localStorage
+      localStorage.setItem('cart', JSON.stringify(cart));
+      show_badge_cart();
+
+    }
+
+  </script>
+  
+
+{% endblock %}

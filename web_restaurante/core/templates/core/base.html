@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- digital color -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    {% load static %}
+
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+      integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+      crossorigin="anonymous"
+    />
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'core/css/business-casual.css' %}" />
+    <title> {% block title %} {% endblock %} | My Restaurant</title>
+  </head>
+
+  <body>
+  
+    <h1 class="site-heading text-center text-white d-none d-lg-block">
+      <span class="site-heading-upper text-primary mb-3">L'autentico caffè d'italia</span>
+      <span class="site-heading-lower">La Caffettiera</span>
+    </h1>
+
+    <!-- Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="{% url 'core:index' %}">La Caffettiera</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>        
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item px-lg-4 {% if request.path == '/' %} active {% endif %}">
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'core:index' %}">Inicio</a>
+            </li>
+            <li class="nav-item px-lg-4 {% if request.path == '/acerca-de/' %} active {% endif %}" >
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'core:about' %}">Historia</a>
+            </li>
+            <li class="nav-item px-lg-4 {% if request.path == '/servicios/' %} active {% endif %}">
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'services:services' %}">Servicios</a>
+            </li>
+            <li class="nav-item px-lg-4 {% if request.path == '/visitanos/' %} active {% endif %}">
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'core:store' %}">Visítanos</a>
+            </li>
+            <li class="nav-item px-lg-4 {% if request.path == '/contacto/' %} active {% endif %}">
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'contact' %}">Contacto</a>
+            </li>
+            <li class="nav-item px-lg-4 {% if request.path|slice:':6' == '/blog/' %} active {% endif %}">
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'blog:blog' %}">Blog</a>
+            </li>
+            <li class="nav-item px-lg-4 {% if request.path == '/recipe/' %} active {% endif %}">
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'recipes:recipes' %}">Recetas</a>
+            </li>
+            <li>
+              <a href="#" onclick="verPedido()" class="nav-link text-secondary">
+                <i class="fas fa-shopping-cart"> <span id="cart-badge" class="badge badge-danger">0</span> </i>             
+              </a>
+            </li>           
+          </ul>
+        </div>
+
+      </div>
+    </nav>
+
+    <form id="formaCarrito" action="">
+      <input type="hidden" id="carrito">
+    </form>
+
+    {% block content %} {% endblock %}
+
+    <!-- Pié de página -->
+    <footer class="footer text-faded text-center py-5">
+      <div class="container">
+        <p class="m-0">
+          {% if LINK_TWITTER %}
+	        <a href="{{LINK_TWITTER}}" class="link">
+	          <span class="fa-stack fa-lg">
+	            <i class="fa fa-circle fa-stack-2x"></i>
+	            <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+	          </span>
+	        </a>
+          {% endif %}
+
+          {% if LINK_FACEBOOK %}
+	        <a href="{{LINK_FACEBOOK}}" class="link">
+	          <span class="fa-stack fa-lg">
+	            <i class="fa fa-circle fa-stack-2x"></i>
+	            <i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+	          </span>
+	        </a>
+          {% endif %}
+
+          {% if LINK_INSTAGRAM %}
+	        <a href="{{LINK_INSTAGRAM}}" class="link">
+	          <span class="fa-stack fa-lg">
+	            <i class="fa fa-circle fa-stack-2x"></i>
+	            <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
+	          </span>
+	        </a>
+          {% endif %}
+	    </p>
+        <p class="m-0 mbt">
+        <!--
+        	<a href="" class="link">Política de privacidad</a> ·
+        	<a href="" class="link">Aviso legal</a> ·
+        	<a href="" class="link">Cookies</a>
+        -->
+        {% load pages_extras%}
+        {% get_page_list as page_list %}
+        {% for page in page_list %}
+          <a href="{% url 'page' page.id page.title|slugify %}" class="link">{{page.title}}</a>
+          {% if not forloop.last %}
+            ·
+          {% endif %}
+        {% endfor %}
+		</p>
+        <p class="m-0 mbt1">&copy; La Caffettiera 2018</p>
+      </div>
+	</footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>  
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <script>
+    //Coloca la variable del carrito 
+    if (localStorage.getItem('cart')==null) {
+      localStorage.clear(); 
+      var cart={}; 
+    } else {
+      cart = JSON.parse(localStorage.getItem('cart'));
+      show_badge_cart();       
+    }
+
+    function show_badge_cart(){
+      totalItems = 0; 
+      if (localStorage.getItem('cart')!=null) {          
+        cart = JSON.parse(localStorage.getItem('cart'));          
+        for (var x in cart) { 
+          totalItems += parseInt(cart[x]);
+        }
+      }      
+      $('#cart-badge').text(totalItems.toString()); 
+    }
+
+    function verPedido(){
+      //Llenar el input de carrito con los datos del carrito
+      //hacer submit
+    }
+
+  </script>
+
+  {% block contentJS %} {% endblock %}
+
+  </body>
+
+</html>
